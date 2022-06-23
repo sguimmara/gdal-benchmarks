@@ -1,0 +1,3 @@
+[submodule "hyperfine"]
+	path = hyperfine
+	url = https://github.com/sharkdp/hyperfine.git
