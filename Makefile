@@ -19,7 +19,7 @@ jp2: baseline.jp2 baseline+overviews.jp2
 cog: baseline.cog.tif
 
 clean:
-	@git clean -fd
+	@git clean -fdx
 
 translate:
 	gdal_translate $(SRC) $(DST) -outsize $(SIZE) $(SIZE) $(OPTS)
