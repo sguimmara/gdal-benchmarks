@@ -1,6 +1,6 @@
 # GDAL benchmarks
 
-This repository contains a series of benchmark to compare GDAL performance between various raster formats.
+This repository contains a series of benchmark to compare [GDAL](https://gdal.org/) performance between various raster formats.
 
 <p align="center">
   <img src="source.jpg" alt="Sublime's custom image"/>
@@ -43,3 +43,31 @@ make JP2DRIVER=JP2ECW
 _Be sure to clean before generating files with a different driver otherwise `make` will not detect the change._
 
 This will generate all the test files from the `source.jpg` image, then execute all benchmarks. The results are in the `out` directory.
+
+## The benchmarks
+
+The benchmarks are executed with the excellent CLI tool [hyperfine](https://github.com/sharkdp/hyperfine).
+
+Each benchmark is repeated $N$ times, where $N$ is the `ITERATIONS` variable in the Makefile. You can adjust the number of iterations with
+
+```shell
+make ITERATIONS=10
+```
+
+The dimensions of the baseline image are set with the `SIZE` variable in the Makefile. You can adjust it dynamically with
+
+```shell
+make SIZE=50000
+```
+
+### read window
+
+This benchmark performs a `gdal_translate` on the `source` file (where `source` is any file generated during the generation step), with various window and output sizes.
+
+For example,
+
+```shell
+gdal_translate <source> <temp> -srcwin 0 0 15000 15000 -outsize 256 256
+```
+
+will extract the window located at $[0, 0]$ and with size $15000 * 15000$ and reduce it to a 256 * 256 image.
