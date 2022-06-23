@@ -1,0 +1,9 @@
+*.tif
+*.jp2
+*.aux.xml
+*.ovr
+*.jpg
+*.tmp
+!source.jpg
+*.bench.json
+out/
